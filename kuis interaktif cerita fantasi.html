@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesmen Formatif: Teks Cerita Fantasi Kelas VII</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tone.js CDN for Synth Fantasy BGM & SFX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        fantasy: ['Fredoka', 'cursive'],
+                    },
+                    colors: {
+                        pastel: {
+                            blue: '#e0f2fe',
+                            pink: '#fce7f3',
+                            yellow: '#fef3c7',
+                            green: '#dcfce7',
+                            purple: '#f3e8ff',
+                            coral: '#ffedd5',
+                            accentBlue: '#0284c7',
+                            accentPink: '#ec4899',
+                            accentYellow: '#f59e0b',
+                            accentGreen: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #a5f3fc 0%, #fef08a 40%, #fbcfe8 75%, #c084fc 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+        }
+        .cartoon-button {
+            box-shadow: 0 4px 0px rgba(0, 0, 0, 0.15);
+            transition: all 0.1s ease;
+        }
+        .cartoon-button:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0px rgba(0, 0, 0, 0.15);
+        }
+        .landscape-wrapper {
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            max-height: 92vh;
+        }
+        @media (max-aspect-ratio: 4/3) {
+            .landscape-wrapper {
+                aspect-ratio: auto;
+                max-height: none;
+            }
+        }
+        /* Custom Scrollbar Pastel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(241, 245, 249, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-800 p-2 md:p-4">
+
+    <!-- LANDSCAPE CONTAINER WRAPPER -->
+    <div class="landscape-wrapper flex flex-col justify-between glass-panel rounded-3xl p-4 md:p-6 shadow-2xl border-4 border-white relative">
+
+        <!-- Header / Navbar (Top Bar) -->
+        <header class="w-full flex justify-between items-center border-b-2 border-sky-100 pb-3 mb-3 shrink-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 flex items-center justify-center text-xl shadow-md ring-4 ring-white">
+                    <i class="fas fa-book-open text-white"></i>
+                </div>
+                <div>
+                    <h1 class="font-fantasy text-xl md:text-2xl text-sky-600 tracking-wide">AKADEMI CERIA VII</h1>
+                    <p class="text-[11px] text-slate-500 font-semibold">Asesmen Formatif Bahasa Indonesia (Fase D) • Mode Landscape</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <!-- Tombol Kontrol Musik & Audio -->
+                <button id="btn-audio-toggle" onclick="toggleAudio()" class="cartoon-button px-3.5 py-1.5 text-xs font-bold bg-amber-100 hover:bg-amber-200 text-amber-700 border border-amber-300 rounded-xl flex items-center gap-1.5">
+                    <i id="icon-audio" class="fas fa-volume-xmark text-rose-500"></i>
+                    <span id="text-audio">Musik: MATI</span>
+                </button>
+                <button id="btn-guru-login" onclick="openModalGuru()" class="cartoon-button px-3.5 py-1.5 text-xs font-bold bg-sky-100 hover:bg-sky-200 text-sky-700 border border-sky-300 rounded-xl flex items-center gap-1.5">
+                    <i class="fas fa-user-shield text-sky-500"></i> Portal Rekap Guru
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow flex flex-col justify-center overflow-hidden relative">
+
+            <!-- SCREEN 1: FORM IDENTITAS & MULAI -->
+            <div id="screen-start" class="w-full h-full flex flex-col justify-center items-center text-center p-2 md:p-4 overflow-y-auto">
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700 border border-amber-300 shadow-sm">
+                        <i class="fas fa-star text-amber-500"></i> Bahasa Indonesia Kelas VII SMP
+                    </div>
+                    
+                    <h2 class="font-fantasy text-3xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-pink-500 to-amber-500 drop-shadow-sm tracking-wide">
+                        KUIS INTERAKTIF CERITA FANTASI
+                    </h2>
+                    
+                    <p class="text-slate-600 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed font-semibold">
+                        Jawab 25 soal pilihan ganda interaktif dengan kunci jawaban bervariasi (A, B, C, D) serta fitur pembahasan langsung!
+                    </p>
+
+                    <!-- Form Identitas -->
+                    <form id="form-start" onsubmit="mulaiKuis(event)" class="space-y-4 max-w-lg mx-auto pt-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
+                            <div class="sm:col-span-2 space-y-1">
+                                <label class="block text-xs font-bold text-sky-700">Nama Lengkap Murid <span class="text-rose-500">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-sky-400"><i class="fas fa-user-graduate"></i></span>
+                                    <input type="text" id="input-nama" required placeholder="Contoh: Luthfiyana" class="w-full pl-10 pr-3 py-2.5 bg-white border-2 border-sky-200 rounded-2xl focus:ring-2 focus:ring-sky-400 focus:border-sky-400 text-slate-800 placeholder-slate-400 text-xs md:text-sm font-semibold transition-all shadow-sm">
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-xs font-bold text-sky-700">Kelas <span class="text-rose-500">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-sky-400"><i class="fas fa-chalkboard-user"></i></span>
+                                    <input type="text" id="input-kelas" required placeholder="VII A" class="w-full pl-10 pr-3 py-2.5 bg-white border-2 border-sky-200 rounded-2xl focus:ring-2 focus:ring-sky-400 focus:border-sky-400 text-slate-800 placeholder-slate-400 text-xs md:text-sm font-semibold transition-all shadow-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="cartoon-button w-full py-3.5 px-6 font-fantasy text-white bg-gradient-to-r from-sky-400 via-pink-400 to-amber-400 hover:opacity-95 rounded-2xl shadow-md text-base flex items-center justify-center gap-2 tracking-wide uppercase">
+                            <i class="fas fa-play text-white"></i> MULAI KUIS
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: SOAL INTERAKTIF (LANDSCAPE 2-COLUMN LAYOUT) -->
+            <div id="screen-quiz" class="hidden h-full flex flex-col justify-between overflow-hidden">
+                <!-- Bar Status Progres -->
+                <div class="flex justify-between items-center gap-3 mb-2 text-xs shrink-0">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-xl bg-sky-500 border-2 border-sky-300 flex items-center justify-center text-white font-bold text-xs shadow-sm" id="label-nomor-soal">1</span>
+                        <span class="font-bold text-sky-800 text-xs md:text-sm" id="label-kategori-soal">Karakteristik Cerita Fantasi</span>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="bg-amber-100 px-3 py-1 rounded-xl border border-amber-300 flex items-center gap-1.5 shadow-sm">
+                            <i class="fas fa-clock text-amber-500"></i>
+                            <span id="quiz-timer" class="font-mono font-bold text-amber-700">00:00</span>
+                        </div>
+                        <div class="bg-emerald-100 px-3 py-1 rounded-xl border border-emerald-300 flex items-center gap-1.5 shadow-sm">
+                            <i class="fas fa-star text-emerald-500"></i>
+                            <span id="live-score" class="font-bold text-emerald-700">0 Poin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar Line -->
+                <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden mb-3 border border-slate-300/50 shrink-0">
+                    <div id="progress-bar-fill" class="bg-gradient-to-r from-sky-400 via-pink-400 to-amber-400 h-2 rounded-full transition-all duration-300" style="width: 4%;"></div>
+                </div>
+
+                <!-- Landscape Grid Layout (Left: Question & Quote, Right: 4 Options & Explanation) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-grow overflow-y-auto p-1">
+                    <!-- Left Side: Soal & Kutipan (5 Cols) -->
+                    <div class="lg:col-span-5 flex flex-col justify-start bg-sky-50/80 p-4 rounded-2xl border-2 border-sky-200 overflow-y-auto shadow-sm">
+                        <div id="box-kutipan" class="hidden mb-3 p-3 rounded-xl bg-white border-l-4 border-amber-400 text-slate-700 text-xs italic leading-relaxed shadow-sm">
+                            <i class="fas fa-quote-left text-amber-400 text-lg -ml-1 -mt-1 block mb-1"></i>
+                            <p id="text-kutipan" class="whitespace-pre-line font-medium"></p>
+                        </div>
+                        <h3 id="text-pertanyaan" class="text-xs md:text-sm font-bold text-slate-800 leading-relaxed">
+                            Loading soal...
+                        </h3>
+                    </div>
+
+                    <!-- Right Side: Pilihan Jawaban & Pembahasan (7 Cols) -->
+                    <div class="lg:col-span-7 flex flex-col justify-between space-y-3 overflow-y-auto">
+                        <div id="container-pilihan" class="grid grid-cols-1 gap-2">
+                            <!-- Options generated dynamically -->
+                        </div>
+
+                        <!-- Box Evaluasi / Pembahasan -->
+                        <div id="box-pembahasan" class="hidden p-3 rounded-xl border-2 text-xs leading-relaxed shrink-0 transition-all shadow-sm">
+                            <div class="flex items-center gap-2 mb-1 font-bold" id="status-jawaban-title"></div>
+                            <p id="text-pembahasan" class="text-slate-700 font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar Navigation -->
+                <div class="flex justify-between items-center border-t-2 border-slate-100 pt-3 mt-2 shrink-0">
+                    <button id="btn-prev" onclick="soalSebelumnya()" class="cartoon-button px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2">
+                        <i class="fas fa-chevron-left"></i> Kembali
+                    </button>
+                    
+                    <button id="btn-next" onclick="soalBerikutnya()" disabled class="cartoon-button px-5 py-2 rounded-xl bg-gradient-to-r from-sky-400 to-emerald-400 hover:opacity-95 text-white font-bold text-xs transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm">
+                        <span id="btn-next-text">Lanjut</span> <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 3: HASIL KUIS -->
+            <div id="screen-result" class="hidden h-full flex flex-col justify-center items-center text-center p-3 overflow-y-auto">
+                <div class="w-full max-w-3xl space-y-4">
+                    <div class="inline-block p-4 rounded-full bg-amber-100 border-4 border-amber-300 shadow-md">
+                        <i class="fas fa-trophy text-4xl text-amber-500"></i>
+                    </div>
+
+                    <h2 class="font-fantasy text-2xl md:text-3xl text-sky-700">Hasil Asesmen Formatif</h2>
+
+                    <!-- Landscape Result Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-left">
+                        <div class="bg-gradient-to-b from-sky-50 to-white rounded-2xl p-4 border-2 border-sky-200 flex flex-col justify-center items-center text-center shadow-sm">
+                            <span class="text-[10px] text-sky-600 uppercase tracking-wider font-extrabold">NILAI AKHIR</span>
+                            <span id="res-score" class="font-fantasy text-5xl text-amber-500 my-1">0</span>
+                            <span id="res-kategori" class="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase shadow-sm">Sangat Baik</span>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-4 border-2 border-slate-200 md:col-span-2 space-y-2 text-xs shadow-sm">
+                            <div class="flex justify-between border-b border-slate-100 pb-1.5">
+                                <span class="text-slate-500 font-medium">Nama Murid:</span>
+                                <span id="res-nama" class="font-bold text-slate-800">-</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-100 pb-1.5">
+                                <span class="text-slate-500 font-medium">Kelas:</span>
+                                <span id="res-kelas" class="font-bold text-slate-800">-</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-100 pb-1.5">
+                                <span class="text-slate-500 font-medium">Jumlah Benar / Salah:</span>
+                                <span><strong id="res-benar" class="text-emerald-600">0 Benar</strong> / <strong id="res-salah" class="text-rose-500">0 Salah</strong></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500 font-medium">Waktu Pengerjaan:</span>
+                                <span id="res-waktu" class="font-mono font-bold text-amber-600">00:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="res-motivasi" class="p-3 rounded-2xl bg-pink-50 border-2 border-pink-200 text-xs text-pink-700 font-semibold italic shadow-sm">
+                        "Teruslah membaca dan menjelajahi keajaiban cerita fantasi!"
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-3 pt-2">
+                        <button onclick="ulangiKuis()" class="cartoon-button px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs shadow-md flex items-center gap-2">
+                            <i class="fas fa-rotate-left"></i> ULANGI KUIS
+                        </button>
+                        <button onclick="openModalGuru()" class="cartoon-button px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-md flex items-center gap-2">
+                            <i class="fas fa-list-check"></i> LIHAT REKAP GURU
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="w-full text-center pt-2 border-t border-slate-200 text-[10px] text-slate-400 font-medium shrink-0">
+            Asesmen Formatif Bahasa Indonesia Kelas VII SMP • Mode Tampilan Landscape • Kurikulum Merdeka (Fase D)
+        </footer>
+
+    </div>
+
+    <!-- MODAL PORTAL REKAPITULASI GURU -->
+    <div id="modal-guru" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 overflow-y-auto">
+        <div class="glass-panel rounded-3xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl border-4 border-white">
+            <!-- Modal Header -->
+            <div class="p-4 border-b-2 border-slate-100 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-table text-sky-500 text-lg"></i>
+                    <h3 class="font-fantasy text-lg text-sky-700">Rekapitulasi Hasil Asesmen Murid</h3>
+                </div>
+                <button onclick="closeModalGuru()" class="text-slate-400 hover:text-slate-600 text-lg px-2">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-4 overflow-y-auto flex-grow space-y-3">
+                <div class="flex flex-wrap justify-between items-center gap-2 bg-sky-50 p-3 rounded-2xl border border-sky-200 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-slate-700 font-semibold">Status Database: <strong class="text-emerald-600">Terhubung Firestore & Lokal</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="downloadCSV()" class="cartoon-button px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold flex items-center gap-1.5">
+                            <i class="fas fa-file-excel"></i> Unduh CSV / Excel
+                        </button>
+                        <button onclick="resetDataGuru()" class="cartoon-button px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-bold flex items-center gap-1.5">
+                            <i class="fas fa-trash"></i> Reset Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="overflow-x-auto rounded-2xl border-2 border-slate-200 bg-white">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-sky-100 text-sky-800 uppercase text-[10px] font-extrabold tracking-wider border-b-2 border-sky-200">
+                            <tr>
+                                <th class="p-2.5">No</th>
+                                <th class="p-2.5">Nama Murid</th>
+                                <th class="p-2.5">Kelas</th>
+                                <th class="p-2.5 text-center">B / S</th>
+                                <th class="p-2.5 text-center">Nilai</th>
+                                <th class="p-2.5 text-center">Kategori</th>
+                                <th class="p-2.5 text-center">Waktu</th>
+                                <th class="p-2.5 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-rekap-body" class="divide-y divide-slate-100">
+                            <!-- Rows generated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DETAIL JAWABAN MURID -->
+    <div id="modal-detail" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 overflow-y-auto">
+        <div class="glass-panel rounded-3xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl border-4 border-white">
+            <div class="p-4 border-b-2 border-slate-100 flex justify-between items-center">
+                <h4 id="detail-title" class="font-bold text-sky-700 text-xs md:text-sm">Detail Jawaban Murid</h4>
+                <button onclick="closeModalDetail()" class="text-slate-400 hover:text-slate-600 px-2">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="detail-content" class="p-4 overflow-y-auto space-y-3 text-xs">
+                <!-- Detail items -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FIREBASE MODULE & QUIZ SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        let db = null;
+        let auth = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'kuis-cerita-fantasi-7';
+        
+        try {
+            if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            }
+        } catch (e) {
+            console.log("Firestore standalone mode:", e);
+        }
+
+        window.saveHasilToCloud = async function(dataHasil) {
+            if (!db || !auth.currentUser) return;
+            try {
+                const rekapCol = collection(db, 'artifacts', appId, 'public', 'data', 'rekapitulasi_asesmen');
+                await addDoc(rekapCol, dataHasil);
+            } catch (err) {
+                console.error("Gagal simpan cloud:", err);
+            }
+        };
+
+        if (db) {
+            try {
+                const rekapCol = collection(db, 'artifacts', appId, 'public', 'data', 'rekapitulasi_asesmen');
+                onSnapshot(rekapCol, (snapshot) => {
+                    const cloudData = [];
+                    snapshot.forEach(doc => cloudData.push({ id: doc.id, ...doc.data() }));
+                    if (cloudData.length > 0) {
+                        window.syncCloudToLocal(cloudData);
+                    }
+                }, (err) => console.log("Realtime fetch err:", err));
+            } catch(e){}
+        }
+    </script>
+
+    <script>
+        // SYSTEM AUDIO & MUSIK LATAR THEMA GAME CERIA TEMPO SANTAI (TONE.JS)
+        let audioEnabled = false;
+        let bgmLoop = null;
+        let synthBgm = null;
+        let sfxCorrect = null;
+        let sfxWrong = null;
+        let sfxClick = null;
+
+        function initAudioEngine() {
+            if (synthBgm) return; // Sudah diinisialisasi
+
+            // Synthesizer Soft Arcade BGM (Triangle wave khas casual game yang lembut)
+            synthBgm = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "triangle" },
+                envelope: { attack: 0.02, decay: 0.2, sustain: 0.2, release: 0.4 }
+            }).toDestination();
+            synthBgm.volume.value = -14;
+
+            // SFX Jawaban Benar (Gentle Chime Fanfare Arcade)
+            sfxCorrect = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "sine" },
+                envelope: { attack: 0.005, decay: 0.3, sustain: 0.1, release: 0.4 }
+            }).toDestination();
+            sfxCorrect.volume.value = -4;
+
+            // SFX Jawaban Salah (Retro Wobble Slide Down - Khas Game Arcade)
+            sfxWrong = new Tone.Synth({
+                oscillator: { type: "sawtooth" },
+                envelope: { attack: 0.01, decay: 0.4, sustain: 0, release: 0.15 }
+            }).toDestination();
+            sfxWrong.volume.value = -6;
+
+            // SFX Klik Pilihan (Pop Bubble Soft)
+            sfxClick = new Tone.Synth({
+                oscillator: { type: "sine" },
+                envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.05 }
+            }).toDestination();
+            sfxClick.volume.value = -8;
+
+            // Melodi Game Ceria & Santai (Harmoni C - F - G Major)
+            const casualGameMelody = [
+                ["C4", "E4"], ["G4"], ["C5"], ["E5"],
+                ["G4"], ["C5"], ["E4"], ["G4"],
+                ["F4", "A4"], ["C5"], ["F5"], ["C5"],
+                ["A4"], ["F4"], ["C5"], ["A4"],
+                ["G4", "B4"], ["D5"], ["G5"], ["D5"],
+                ["B4"], ["G4"], ["D5"], ["B4"],
+                ["C4", "E4", "G4"], ["G4"], ["C5"], ["E5"]
+            ];
+
+            let index = 0;
+            bgmLoop = new Tone.Loop((time) => {
+                if (audioEnabled) {
+                    synthBgm.triggerAttackRelease(casualGameMelody[index], "8n", time);
+                    index = (index + 1) % casualGameMelody.length;
+                }
+            }, "8n");
+
+            Tone.Transport.bpm.value = 92; // Tempo santai & ceria (92 BPM)
+        }
+
+        window.toggleAudio = async function() {
+            if (!audioEnabled) {
+                await Tone.start();
+                initAudioEngine();
+                audioEnabled = true;
+                Tone.Transport.start();
+                if (bgmLoop) bgmLoop.start(0);
+
+                document.getElementById('icon-audio').className = 'fas fa-volume-high text-emerald-400';
+                document.getElementById('text-audio').innerText = 'Musik: HIDUP';
+            } else {
+                audioEnabled = false;
+                if (Tone.Transport.state === 'started') {
+                    Tone.Transport.stop();
+                }
+                document.getElementById('icon-audio').className = 'fas fa-volume-xmark text-rose-400';
+                document.getElementById('text-audio').innerText = 'Musik: MATI';
+            }
+        };
+
+        function playSFX(type) {
+            if (!audioEnabled) return;
+            const now = Tone.now();
+            if (type === 'click' && sfxClick) {
+                sfxClick.triggerAttackRelease("G5", "32n", now);
+            } else if (type === 'correct' && sfxCorrect) {
+                // Melodi kemenangan santai (C5 -> G5 -> C6)
+                sfxCorrect.triggerAttackRelease(["C5", "E5"], "16n", now);
+                sfxCorrect.triggerAttackRelease(["G5"], "16n", now + 0.1);
+                sfxCorrect.triggerAttackRelease(["C6", "E6"], "8n", now + 0.2);
+            } else if (type === 'wrong' && sfxWrong) {
+                // Suara khas game jika salah: Sawtooth Glissando Lambat (E3 -> Bb2 Slide)
+                sfxWrong.triggerAttackRelease("E3", "8n", now);
+                sfxWrong.frequency.setValueAtTime("E3", now);
+                sfxWrong.frequency.exponentialRampToValueAtTime("Bb2", now + 0.35);
+            }
+        }
+
+        // DATA 25 SOAL BAHASA INDONESIA KELAS VII (VARIASE KUNCI JAWABAN TERSEBAR A, B, C, D)
+        const BANK_SOAL = [
+            // 4 SOAL: PENGERTIAN & KARAKTERISTIK (Kunci: A, C, D, B)
+            {
+                id: 1,
+                kategori: "Karakteristik Cerita Fantasi",
+                tingkat: "Mudah",
+                pertanyaan: "Berikut ini yang merupakan pengertian paling tepat dari teks cerita fantasi adalah...",
+                pilihan: [
+                    "Cerita fiksi yang memuat keajaiban, keanehan, atau hal-hal gaib yang tidak terjadi di dunia nyata.",
+                    "Teks yang berisi laporan hasil pengamatan terhadap objek alam secara faktual dan ilmiah.",
+                    "Kisah hidup seseorang yang ditulis oleh orang lain berdasarkan fakta sejarah.",
+                    "Teks yang memberikan petunjuk atau langkah-langkah membuat sesuatu secara sistematis."
+                ],
+                kunci: 0, // A
+                pembahasan: "Cerita fantasi adalah cerita fiksi ilmiah/khayalan yang mengusung keajaiban, keanehan, atau hal supranatural yang melintasi batas logika nyata."
+            },
+            {
+                id: 2,
+                kategori: "Karakteristik Cerita Fantasi",
+                tingkat: "Sedang",
+                pertanyaan: "Salah satu ciri khas utama dari cerita fantasi dibanding teks narasi sejarah adalah...",
+                pilihan: [
+                    "Menggunakan bahasa baku resmi tanpa kiasan.",
+                    "Seluruh peristiwa wajib terikat oleh fakta ilmiah nyata.",
+                    "Memiliki tokoh dengan kesaktian atau kemampuan supranatural.",
+                    "Tidak memiliki alur dan konflik cerita."
+                ],
+                kunci: 2, // C
+                pembahasan: "Tokoh dalam cerita fantasi sering kali dibekali kesaktian atau keajaiban khusus, seperti bisa terbang, mengendalikan elemen, atau menembus waktu."
+            },
+            {
+                id: 3,
+                kategori: "Karakteristik Cerita Fantasi",
+                tingkat: "Sedang",
+                pertanyaan: "Berdasarkan latar waktunya, cerita fantasi yang menggunakan dua dimensi waktu berbeda (misalnya masa kini dan masa 500 tahun yang lalu) disebut cerita fantasi...",
+                pilihan: [
+                    "Sezaman",
+                    "Irrealis",
+                    "Latar Tunggal",
+                    "Cross-time / Lintas Waktu"
+                ],
+                kunci: 3, // D
+                pembahasan: "Cerita fantasi lintas waktu melibatkan dua masa/waktu yang berbeda dalam urutan ceritanya."
+            },
+            {
+                id: 4,
+                kategori: "Karakteristik Cerita Fantasi",
+                tingkat: "Sulit",
+                pertanyaan: "Cerita fantasi bersifat 'irisan' artinya adalah...",
+                pilihan: [
+                    "Seluruh bagian cerita merupakan fantasi murni tanpa ada unsur dunia nyata sedikit pun.",
+                    "Cerita menggunakan nama tempat dan peristiwa nyata tetapi dicampur dengan keajaiban imajinatif.",
+                    "Cerita dipotong-potong menjadi beberapa bagian bab terpisah.",
+                    "Tokoh utama diambil dari tokoh politik di kehidupan nyata."
+                ],
+                kunci: 1, // B
+                pembahasan: "Fantasi irisan mengungkapkan fantasi yang masih menggunakan nama-nama dalam kehidupan nyata atau tempat yang ada di dunia nyata."
+            },
+
+            // 7 SOAL: STRUKTUR (Kunci: B, A, C, D, A, C, B)
+            {
+                id: 5,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Mudah",
+                pertanyaan: "Bagian awal cerita fantasi yang berfungsi mengenalkan tokoh, latar, dan gambaran umum cerita disebut...",
+                pilihan: [
+                    "Komplikasi",
+                    "Orientasi",
+                    "Resolusi",
+                    "Koda"
+                ],
+                kunci: 1, // B
+                pembahasan: "Orientasi merupakan bagian penentu awal cerita yang berisi pengenalan tokoh, latar tempat, latar waktu, dan suasana."
+            },
+            {
+                id: 6,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Sedang",
+                pertanyaan: "Bagian dalam cerita fantasi saat masalah mulai bermunculan hingga mencapai puncak konflik dinamakan...",
+                pilihan: [
+                    "Komplikasi",
+                    "Orientasi",
+                    "Resolusi",
+                    "Abstraksi"
+                ],
+                kunci: 0, // A
+                pembahasan: "Komplikasi berisi urutan kejadian yang memicu munculnya masalah hingga masalah tersebut memuncak (klimaks)."
+            },
+            {
+                id: 7,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Mudah",
+                pertanyaan: "Bagian akhir cerita fantasi yang memuat penyelesaian masalah dari konflik yang terjadi disebut...",
+                pilihan: [
+                    "Orientasi",
+                    "Komplikasi",
+                    "Resolusi",
+                    "Reorientasi"
+                ],
+                kunci: 2, // C
+                pembahasan: "Resolusi merupakan bagian akhir yang berisi jalan keluar atau penyelesaian dari masalah yang dialami tokoh."
+            },
+            {
+                id: 8,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Sulit",
+                kutipan: "Di sebuah Hutan Jamur Perak, hiduplah seorang peri kecil bernama Elina. Elina memiliki sayap bening yang dapat memancarkan cahaya saat malam hari.",
+                pertanyaan: "Kutipan teks cerita fantasi di atas merupakan bagian struktur...",
+                pilihan: [
+                    "Komplikasi, karena mulai timbul masalah pada sayap Elina.",
+                    "Resolusi, karena Elina berhasil menemukan cahaya malam.",
+                    "Koda, karena memuat pesan moral cerita.",
+                    "Orientasi, karena mengenalkan tokoh Elina dan latar Hutan Jamur Perak."
+                ],
+                kunci: 3, // D
+                pembahasan: "Kutipan tersebut berada di awal cerita dan memperkenalkan tokoh (Elina) serta latar tempat (Hutan Jamur Perak), maka termasuk Orientasi."
+            },
+            {
+                id: 9,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Sulit",
+                kutipan: "Tiba-tiba, tanah yang dipijak Anika bergetar hebat. Sebuah cermin kuno memancarkan sinar biru pekat dan menarik tubuh Anika masuk ke dalam lorong waktu tanpa bisa melawan.",
+                pertanyaan: "Kutipan cerita fantasi di atas menunjukkan bagian struktur...",
+                pilihan: [
+                    "Komplikasi",
+                    "Orientasi",
+                    "Resolusi",
+                    "Penutup"
+                ],
+                kunci: 0, // A
+                pembahasan: "Terjadinya peristiwa ajaib berupa cermin yang menarik tokoh masuk ke lorong waktu menandai dimulainya masalah (Komplikasi)."
+            },
+            {
+                id: 10,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Sedang",
+                kutipan: "Dengan menyatukan ketiga kristal warna, batu pelindung Kerajaan Awan kembali bersinar. Pasukan naga hitam akhirnya menyerah dan kedamaian pulih kembali.",
+                pertanyaan: "Berdasarkan struktur teks fantasi, kutipan tersebut terdapat pada bagian...",
+                pilihan: [
+                    "Orientasi",
+                    "Komplikasi",
+                    "Resolusi",
+                    "Klimaks"
+                ],
+                kunci: 2, // C
+                pembahasan: "Kutipan ini menceritakan akhir penanggulangan masalah dan pulihnya kedamaian, yang merupakan ciri dari bagian Resolusi."
+            },
+            {
+                id: 11,
+                kategori: "Struktur Cerita Fantasi",
+                tingkat: "Sedang",
+                pertanyaan: "Urutan struktur teks cerita fantasi yang benar dan sistematis adalah...",
+                pilihan: [
+                    "Komplikasi → Orientasi → Resolusi",
+                    "Orientasi → Komplikasi → Resolusi",
+                    "Resolusi → Komplikasi → Orientasi",
+                    "Orientasi → Resolusi → Komplikasi"
+                ],
+                kunci: 1, // B
+                pembahasan: "Struktur cerita fantasi disusun secara urut mulai dari pengenalan (Orientasi), kemunculan masalah (Komplikasi), hingga penyelesaian (Resolusi)."
+            },
+
+            // 8 SOAL: UNSUR INTRINSIK (Kunci: C, B, A, D, A, D, B, C)
+            {
+                id: 12,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Mudah",
+                pertanyaan: "Gagasan dasar atau ide utama yang menjadi landasan pengembangan cerita fantasi disebut...",
+                pilihan: [
+                    "Latar",
+                    "Amanat",
+                    "Tema",
+                    "Alur"
+                ],
+                kunci: 2, // C
+                pembahasan: "Tema adalah ide utama atau gagasan pokok yang mendasari keseluruhan jalan cerita."
+            },
+            {
+                id: 13,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Mudah",
+                pertanyaan: "Tokoh penentang atau tokoh yang memiliki sifat jahat dan bertentangan dengan tokoh utama disebut tokoh...",
+                pilihan: [
+                    "Protagonis",
+                    "Antagonis",
+                    "Tritagonis",
+                    "Figuran"
+                ],
+                kunci: 1, // B
+                pembahasan: "Tokoh antagonis adalah tokoh yang berwatak buruk/penentang yang menciptakan konflik bagi tokoh utama."
+            },
+            {
+                id: 14,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Sedang",
+                kutipan: "Nami membagikan roti ajaibnya kepada anak-anak desa yang kelaparan, meskipun ia sendiri hanya memiliki tersisa satu potong roti.",
+                pertanyaan: "Watak tokoh Nami pada kutipan cerita fantasi tersebut adalah...",
+                pilihan: [
+                    "Penyayang dan dermawan",
+                    "Sombong dan pamer",
+                    "Penakut dan ragu-ragu",
+                    "Cerdik dan licik"
+                ],
+                kunci: 0, // A
+                pembahasan: "Sikap Nami yang rela membagikan roti ajaibnya saat orang lain membutuhkan menunjukkan watak dermawan dan penyayang."
+            },
+            {
+                id: 15,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Sedang",
+                pertanyaan: "Tempat, waktu, dan suasana terjadinya peristiwa dalam cerita fantasi disebut...",
+                pilihan: [
+                    "Alur / Plot",
+                    "Sudut Pandang",
+                    "Amanat",
+                    "Latar / Setting"
+                ],
+                kunci: 3, // D
+                pembahasan: "Latar mencakup tiga elemen utama yaitu latar tempat, latar waktu, serta latar suasana."
+            },
+            {
+                id: 16,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Sedang",
+                kutipan: "Malam makin larut. Istana Es nampak makin mencekam ketika angin bertiup kencang meraung-raung di sela-sela menara kristal.",
+                pertanyaan: "Latar suasana yang tergambar dalam kutipan tersebut adalah...",
+                pilihan: [
+                    "Mencekam dan menakutkan",
+                    "Menggembirakan dan meriah",
+                    "Damai dan menenangkan",
+                    "Haru dan menyedihkan"
+                ],
+                kunci: 0, // A
+                pembahasan: "Penggunaan kata 'malam larut', 'mencekam', dan 'angin meraung-raung' menggambarkan suasana yang menakutkan/mencekam."
+            },
+            {
+                id: 17,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Sulit",
+                pertanyaan: "Pesan moral atau pelajaran hidup yang ingin disampaikan pengarang kepada pembaca melalui cerita fantasi dinamakan...",
+                pilihan: [
+                    "Tema",
+                    "Alur",
+                    "Penokohan",
+                    "Amanat"
+                ],
+                kunci: 3, // D
+                pembahasan: "Amanat adalah ajaran moral atau nilai kebaikan yang ingin disampaikan pengarang melalui kisah tokoh-tokohnya."
+            },
+            {
+                id: 18,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Sulit",
+                pertanyaan: "Rangkaian jalannya peristiwa dari awal, tengah, hingga akhir dalam cerita fantasi membentuk sebuah...",
+                pilihan: [
+                    "Latar (Setting)",
+                    "Alur (Plot)",
+                    "Sudut Pandang",
+                    "Gaya Bahasa"
+                ],
+                kunci: 1, // B
+                pembahasan: "Alur adalah jalinan peristiwa yang memiliki hubungan sebab-akibat hingga membentuk cerita yang utuh."
+            },
+            {
+                id: 19,
+                kategori: "Unsur Intrinsik",
+                tingkat: "Sedang",
+                pertanyaan: "Penggunaan sudut pandang orang pertama ditandai dengan penggunaan kata ganti...",
+                pilihan: [
+                    "Dia / Mereka",
+                    "Kamu / Kalian",
+                    "Aku / Saya",
+                    "Kita / Kami"
+                ],
+                kunci: 2, // C
+                pembahasan: "Sudut pandang orang pertama menggunakan kata ganti 'Aku' atau 'Saya'."
+            },
+
+            // 6 SOAL: ANALISIS KUTIPAN & KONFLIK (Kunci: A, B, C, D, B, A)
+            {
+                id: 20,
+                kategori: "Analisis Kutipan & Konflik",
+                tingkat: "Sedang",
+                kutipan: "Handi menyesal telah mengambil tongkat sihir hitam dari gua terlarang. Kini makhluk raksasa batu terbangun dan mulai merusak pemukiman warga.",
+                pertanyaan: "Penyebab timbulnya konflik pada kutipan cerita di atas adalah...",
+                pilihan: [
+                    "Handi melanggar larangan dengan mengambil tongkat sihir hitam.",
+                    "Warga desa menyerang raksasa batu.",
+                    "Raksasa batu kekurangan tempat tinggal.",
+                    "Gua terlarang runtuh diterpa badai."
+                ],
+                kunci: 0, // A
+                pembahasan: "Konflik raksasa menyerang warga terpicu karena Handi mengambil tongkat sihir dari gua terlarang."
+            },
+            {
+                id: 21,
+                kategori: "Analisis Kutipan & Konflik",
+                tingkat: "Sedang",
+                kutipan: "Meskipun dilarang oleh ibunya, Tara tetap meminum ramuan tak terlihat agar bisa bolos sekolah. Akibatnya, tubuh Tara tidak bisa kembali wujud semula.",
+                pertanyaan: "Pesan moral (amanat) yang tepat berdasarkan kutipan cerita di atas adalah...",
+                pilihan: [
+                    "Gunakan ramuan ajaib sesering mungkin untuk membantu teman.",
+                    "Dengarkan dan patuhilah nasihat orang tua agar tidak menyesal.",
+                    "Jangan pernah pergi sekolah jika merasa bosan.",
+                    "Sembunyikan benda ajaib dari orang lain."
+                ],
+                kunci: 1, // B
+                pembahasan: "Akibat buruk yang dialami Tara terjadi karena ia melanggar nasihat ibunya, sehingga amanatnya adalah patuh pada nasihat orang tua."
+            },
+            {
+                id: 22,
+                kategori: "Analisis Kutipan & Konflik",
+                tingkat: "Sulit",
+                kutipan: "Cincin Api hanya mau tunduk kepada kesatria yang memiliki hati murni dan jujur. Ketika Pangeran Raka yang curang memegangnya, cincin itu memancarkan petir dan terlepas.",
+                pertanyaan: "Informasi implisit yang dapat disimpulkan dari kutipan cerita tersebut adalah...",
+                pilihan: [
+                    "Pangeran Raka adalah kesatria berhati murni.",
+                    "Cincin Api dapat digunakan oleh siapa saja.",
+                    "Pangeran Raka memiliki sifat tidak jujur / curang.",
+                    "Pangeran Raka berhasil menguasai Cincin Api."
+                ],
+                kunci: 2, // C
+                pembahasan: "Karena cincin menolak Pangeran Raka dan petir terlepas, terbukti Pangeran Raka tidak berhati murni (bersifat curang)."
+            },
+            {
+                id: 23,
+                kategori: "Analisis Kutipan & Konflik",
+                tingkat: "Sedang",
+                kutipan: "Zora tersesat di dalam Labirin Cermin. Setiap kali ia mencoba memecahkan cermin, bayangan dirinya justru bertambah banyak dan mengepungnya.",
+                pertanyaan: "Jenis konflik yang dialami oleh tokoh Zora dalam kutipan fantasi tersebut adalah...",
+                pilihan: [
+                    "Konflik batin sosial antar warga desa",
+                    "Konflik politik perebutan takhta istana",
+                    "Konflik percintaan remaja",
+                    "Konflik fisik / alam (tokoh melawan rintangan tempat ajaib)"
+                ],
+                kunci: 3, // D
+                pembahasan: "Zora berhadapan dengan rintangan fisik/magic berupa tempat ajaib (Labirin Cermin) yang menjebaknya."
+            },
+            {
+                id: 24,
+                kategori: "Analisis Kutipan & Konflik",
+                tingkat: "Sulit",
+                kutipan: "Buku Harian Waktu memutar kembali hari ke minggu lalu. Aris mendapat kesempatan kedua untuk memperbaiki kesalahannya yang pernah merusak tanaman bunga emas milik neneknya.",
+                pertanyaan: "Nilai positif dari tindakan tokoh Aris setelah mendapat kesempatan kedua adalah...",
+                pilihan: [
+                    "Memanfaatkannya untuk menyembunyikan kejahatan lain.",
+                    "Bertanggung jawab dan bertekad memperbaiki kesalahan masa lalu.",
+                    "Menjual Buku Harian Waktu dengan harga mahal.",
+                    "Pindah ke kota lain untuk menghindari nenek."
+                ],
+                kunci: 1, // B
+                pembahasan: "Aris menggunakan keajaiban waktu untuk bertanggung jawab dan memperbaiki kesalahan yang dilakukannya."
+            },
+            {
+                id: 25,
+                kategori: "Analisis Kutipan & Konflik",
+                tingkat: "Sedang",
+                kutipan: "Kunci Emas hanya akan terbuka jika tiga sahabat (Koko, Dani, dan Lili) mengucapkan mantra bersama dengan kompak tanpa rasa iri hati.",
+                pertanyaan: "Pesan yang terkandung dalam syarat pembukaan Kunci Emas tersebut adalah...",
+                pilihan: [
+                    "Kerja sama dan kebersamaan dapat menyelesaikan rintangan berat.",
+                    "Kekuatan sihir lebih penting daripada persahabatan.",
+                    "Keinginan pribadi harus diutamakan di atas kepentingan kelompok.",
+                    "Persahabatan akan rusak jika berbagi kunci."
+                ],
+                kunci: 0, // A
+                pembahasan: "Syarat mengucapkan mantra bersama secara kompak mengajarkan pentingnya kekompakan dan kerja sama."
+            }
+        ];
+
+        // STATE APLIKASI
+        let currentSoalIndex = 0;
+        let userAnswers = new Array(BANK_SOAL.length).fill(null);
+        let userAttempts = new Array(BANK_SOAL.length).fill(null); // Menyimpan pilihan-pilihan yang sudah dicoba
+        let isQuestionSolved = new Array(BANK_SOAL.length).fill(false); // Status apakah soal sudah berhasil dipecahkan
+        let namaMurid = "";
+        let kelasMurid = "";
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let rekapDataLocal = JSON.parse(localStorage.getItem('rekap_asesmen_fantasi_v7') || '[]');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTableRekap();
+        });
+
+        window.mulaiKuis = function(e) {
+            e.preventDefault();
+            const inputNama = document.getElementById('input-nama').value.trim();
+            const inputKelas = document.getElementById('input-kelas').value.trim();
+
+            if (!inputNama || !inputKelas) {
+                alert("Harap isi Nama dan Kelas terlebih dahulu!");
+                return;
+            }
+
+            // Jalankan audio otomatis saat tombol mulai diklik jika belum diaktifkan
+            if (!audioEnabled) {
+                toggleAudio();
+            }
+
+            namaMurid = inputNama;
+            kelasMurid = inputKelas;
+
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-quiz').classList.remove('hidden');
+
+            currentSoalIndex = 0;
+            userAnswers = new Array(BANK_SOAL.length).fill(null);
+            userAttempts = Array.from({ length: BANK_SOAL.length }, () => []);
+            isQuestionSolved = new Array(BANK_SOAL.length).fill(false);
+            timerSeconds = 0;
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                const secs = String(timerSeconds % 60).padStart(2, '0');
+                document.getElementById('quiz-timer').innerText = `${mins}:${secs}`;
+            }, 1000);
+
+            loadSoal();
+        };
+
+        function loadSoal() {
+            const soal = BANK_SOAL[currentSoalIndex];
+
+            document.getElementById('label-nomor-soal').innerText = currentSoalIndex + 1;
+            document.getElementById('label-kategori-soal').innerText = `${soal.kategori} (${soal.tingkat})`;
+            
+            const progressPercent = ((currentSoalIndex + 1) / BANK_SOAL.length) * 100;
+            document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
+
+            document.getElementById('text-pertanyaan').innerText = `${currentSoalIndex + 1}. ${soal.pertanyaan}`;
+
+            const boxKutipan = document.getElementById('box-kutipan');
+            if (soal.kutipan) {
+                document.getElementById('text-kutipan').innerText = soal.kutipan;
+                boxKutipan.classList.remove('hidden');
+            } else {
+                boxKutipan.classList.add('hidden');
+            }
+
+            const containerPilihan = document.getElementById('container-pilihan');
+            containerPilihan.innerHTML = '';
+
+            const attempts = userAttempts[currentSoalIndex] || [];
+            const solved = isQuestionSolved[currentSoalIndex];
+
+            soal.pilihan.forEach((pilihanText, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                
+                const isTriedWrong = attempts.includes(idx) && idx !== soal.kunci;
+                const isCorrectChoice = solved && idx === soal.kunci;
+                
+                btn.className = `w-full text-left p-2.5 rounded-xl border transition-all flex items-start gap-2.5 ${getPilihanStyleInteractive(idx, isTriedWrong, isCorrectChoice, solved)}`;
+                
+                const alpha = String.fromCharCode(65 + idx);
+
+                btn.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm ${getBadgeAlphaStyleInteractive(idx, isTriedWrong, isCorrectChoice, solved)}">
+                        ${isTriedWrong ? '<i class="fas fa-xmark text-white text-sm"></i>' : (isCorrectChoice ? '<i class="fas fa-check text-white text-sm"></i>' : alpha)}
+                    </span>
+                    <span class="text-xs md:text-sm pt-0.5 leading-relaxed font-bold text-slate-800">${pilihanText}</span>
+                `;
+
+                if (!isTriedWrong && !solved) {
+                    btn.onclick = () => pilihJawaban(idx);
+                } else {
+                    btn.disabled = true;
+                }
+
+                containerPilihan.appendChild(btn);
+            });
+
+            const boxPembahasan = document.getElementById('box-pembahasan');
+            const statusTitle = document.getElementById('status-jawaban-title');
+            const textPembahasan = document.getElementById('text-pembahasan');
+
+            if (solved) {
+                boxPembahasan.classList.remove('hidden');
+                const isFirstTry = attempts.length === 1;
+                boxPembahasan.className = "p-3 rounded-xl border bg-emerald-950/60 border-emerald-500/50 text-emerald-200 text-xs";
+                
+                if (isFirstTry) {
+                    statusTitle.innerHTML = `<i class="fas fa-circle-check text-emerald-400 text-sm"></i> BENAR SEKALI! (+4 Poin)`;
+                } else {
+                    statusTitle.innerHTML = `<i class="fas fa-check-circle text-amber-400 text-sm"></i> JAWABAN BENAR DITEMUKAN! (+2 Poin)`;
+                }
+                textPembahasan.innerHTML = `<strong>Pembahasan:</strong> ${soal.pembahasan}`;
+            } else if (attempts.length > 0) {
+                boxPembahasan.classList.remove('hidden');
+                boxPembahasan.className = "p-3 rounded-xl border bg-amber-950/60 border-amber-500/50 text-amber-200 text-xs animate-bounce";
+                statusTitle.innerHTML = `<i class="fas fa-lightbulb text-amber-400 text-sm"></i> BELUM TEPAT`;
+                textPembahasan.innerHTML = `Pilihanmu belum pas. Yuk coba baca ulang pertanyaan dan pilih jawaban lainnya!`;
+            } else {
+                boxPembahasan.classList.add('hidden');
+            }
+
+            document.getElementById('btn-prev').disabled = currentSoalIndex === 0;
+
+            const btnNext = document.getElementById('btn-next');
+            const btnNextText = document.getElementById('btn-next-text');
+            btnNext.disabled = !solved;
+
+            if (currentSoalIndex === BANK_SOAL.length - 1) {
+                btnNextText.innerText = "Selesai & Hasil";
+            } else {
+                btnNextText.innerText = "Lanjut";
+            }
+
+            hitungLiveScore();
+        }
+
+        function pilihJawaban(idxChoice) {
+            playSFX('click');
+            const soal = BANK_SOAL[currentSoalIndex];
+            
+            if (!userAttempts[currentSoalIndex].includes(idxChoice)) {
+                userAttempts[currentSoalIndex].push(idxChoice);
+            }
+
+            if (idxChoice === soal.kunci) {
+                playSFX('correct');
+                isQuestionSolved[currentSoalIndex] = true;
+                userAnswers[currentSoalIndex] = idxChoice;
+            } else {
+                playSFX('wrong');
+            }
+
+            loadSoal();
+        }
+
+        function getPilihanStyleInteractive(idx, isTriedWrong, isCorrectChoice, solved) {
+            if (isCorrectChoice) {
+                return "bg-emerald-100 border-3 border-emerald-600 font-bold text-emerald-950 shadow-md";
+            }
+            if (isTriedWrong) {
+                return "bg-rose-100 border-2 border-rose-400 text-rose-900 opacity-80 cursor-not-allowed";
+            }
+            if (solved) {
+                return "bg-slate-100 border-2 border-slate-300 text-slate-500 opacity-50 cursor-not-allowed";
+            }
+            return "bg-white border-2 border-sky-300 hover:border-amber-400 hover:bg-amber-50 cursor-pointer shadow-sm text-slate-900 font-bold";
+        }
+
+        function getBadgeAlphaStyleInteractive(idx, isTriedWrong, isCorrectChoice, solved) {
+            if (isCorrectChoice) {
+                return "bg-emerald-600 text-white ring-2 ring-emerald-300";
+            }
+            if (isTriedWrong) {
+                return "bg-rose-600 text-white ring-2 ring-rose-300";
+            }
+            return "bg-sky-500 text-white font-extrabold ring-2 ring-sky-200";
+        }
+
+        function hitungLiveScore() {
+            let score = 0;
+            for (let i = 0; i < BANK_SOAL.length; i++) {
+                if (isQuestionSolved[i]) {
+                    const attempts = userAttempts[i] ? userAttempts[i].length : 1;
+                    if (attempts === 1) {
+                        score += 4;
+                    } else {
+                        score += 2;
+                    }
+                }
+            }
+            const scoreEl = document.getElementById('live-score');
+            if (scoreEl) scoreEl.innerText = `${score} Poin`;
+            return score;
+        }
+
+        window.soalSebelumnya = function() {
+            if (currentSoalIndex > 0) {
+                currentSoalIndex--;
+                loadSoal();
+            }
+        };
+
+        window.soalBerikutnya = function() {
+            if (currentSoalIndex < BANK_SOAL.length - 1) {
+                currentSoalIndex++;
+                loadSoal();
+            } else {
+                selesaiKuis();
+            }
+        };
+
+        function selesaiKuis() {
+            if (timerInterval) clearInterval(timerInterval);
+
+            const finalScore = hitungLiveScore();
+            let totalBenarFirstTry = 0;
+            let totalBenarRetry = 0;
+            let totalSalah = 0;
+
+            for (let i = 0; i < BANK_SOAL.length; i++) {
+                if (isQuestionSolved[i]) {
+                    if (userAttempts[i].length === 1) {
+                        totalBenarFirstTry++;
+                    } else {
+                        totalBenarRetry++;
+                    }
+                } else {
+                    totalSalah++;
+                }
+            }
+
+            const totalBenar = totalBenarFirstTry + totalBenarRetry;
+
+            document.getElementById('screen-quiz').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            document.getElementById('res-nama').innerText = namaMurid;
+            document.getElementById('res-kelas').innerText = kelasMurid;
+            document.getElementById('res-score').innerText = finalScore;
+            document.getElementById('res-benar').innerText = `${totalBenar} Benar (${totalBenarFirstTry} Percobaan Pertama)`;
+            document.getElementById('res-salah').innerText = `${totalSalah} Salah`;
+
+            const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+            const secs = String(timerSeconds % 60).padStart(2, '0');
+            const waktuStr = `${mins}:${secs}`;
+            document.getElementById('res-waktu').innerText = waktuStr;
+
+            let kategori = "";
+            let badgeClass = "";
+            let motivasi = "";
+
+            if (finalScore >= 86) {
+                kategori = "Sangat Baik";
+                badgeClass = "bg-emerald-100 text-emerald-800 border border-emerald-300";
+                motivasi = "Luar biasa! Pemahamanmu tentang teks cerita fantasi sangat mendalam. Pertahankan prestasimu!";
+            } else if (finalScore >= 76) {
+                kategori = "Baik";
+                badgeClass = "bg-sky-100 text-sky-800 border border-sky-300";
+                motivasi = "Kerja bagus! Kamu sudah memahami alur dan unsur fantasi dengan sangat baik.";
+            } else if (finalScore >= 66) {
+                kategori = "Cukup";
+                badgeClass = "bg-amber-100 text-amber-800 border border-amber-300";
+                motivasi = "Cukup baik! Tingkatkan lagi pemahamanmu mengenai struktur dan analisis cerita fantasi.";
+            } else {
+                kategori = "Perlu Bimbingan";
+                badgeClass = "bg-rose-100 text-rose-800 border border-rose-300";
+                motivasi = "Jangan berkecil hati! Pelajari kembali materi teks cerita fantasi dan coba lagi kuis ini.";
+            }
+
+            const elKategori = document.getElementById('res-kategori');
+            elKategori.innerText = kategori;
+            elKategori.className = `px-3 py-0.5 rounded-full text-[10px] font-bold uppercase shadow-sm ${badgeClass}`;
+            document.getElementById('res-motivasi').innerText = `"${motivasi}"`;
+
+            const dataHasil = {
+                nama: namaMurid,
+                kelas: kelasMurid,
+                benar: totalBenar,
+                salah: totalSalah,
+                nilai: finalScore,
+                kategori: kategori,
+                waktu: waktuStr,
+                tanggal: new Date().toLocaleString('id-ID'),
+                jawabanMurid: userAnswers
+            };
+
+            rekapDataLocal.push(dataHasil);
+            localStorage.setItem('rekap_asesmen_fantasi_v7', JSON.stringify(rekapDataLocal));
+
+            if (typeof window.saveHasilToCloud === 'function') {
+                window.saveHasilToCloud(dataHasil);
+            }
+
+            renderTableRekap();
+        }
+
+        window.ulangiKuis = function() {
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+        };
+
+        window.syncCloudToLocal = function(cloudData) {
+            rekapDataLocal = cloudData;
+            localStorage.setItem('rekap_asesmen_fantasi_v7', JSON.stringify(rekapDataLocal));
+            renderTableRekap();
+        };
+
+        function renderTableRekap() {
+            const tbody = document.getElementById('table-rekap-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (rekapDataLocal.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center p-4 text-slate-400 font-medium">Belum ada data pengerjaan asesmen.</td></tr>`;
+                return;
+            }
+
+            rekapDataLocal.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 border-b border-slate-100";
+                tr.innerHTML = `
+                    <td class="p-2.5 font-bold text-slate-600">${index + 1}</td>
+                    <td class="p-2.5 font-bold text-slate-800">${item.nama}</td>
+                    <td class="p-2.5 text-slate-600 font-semibold">${item.kelas}</td>
+                    <td class="p-2.5 text-center font-semibold text-emerald-600">${item.benar} / <span class="text-rose-500">${item.salah}</span></td>
+                    <td class="p-2.5 text-center font-bold text-amber-600 text-sm">${item.nilai}</td>
+                    <td class="p-2.5 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${getBadgeKategoriClass(item.kategori)}">${item.kategori}</span></td>
+                    <td class="p-2.5 text-center font-mono text-xs text-slate-500">${item.waktu}</td>
+                    <td class="p-2.5 text-center">
+                        <button onclick="lihatDetailJawaban(${index})" class="cartoon-button px-2.5 py-1 bg-sky-500 hover:bg-sky-600 text-white rounded-lg text-[10px] font-bold">
+                            <i class="fas fa-eye"></i> Detail
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function getBadgeKategoriClass(kat) {
+            if (kat === 'Sangat Baik') return 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+            if (kat === 'Baik') return 'bg-sky-100 text-sky-800 border border-sky-300';
+            if (kat === 'Cukup') return 'bg-amber-100 text-amber-800 border border-amber-300';
+            return 'bg-rose-100 text-rose-800 border border-rose-300';
+        }
+
+        window.openModalGuru = function() {
+            renderTableRekap();
+            document.getElementById('modal-guru').classList.remove('hidden');
+        };
+
+        window.closeModalGuru = function() {
+            document.getElementById('modal-guru').classList.add('hidden');
+        };
+
+        window.openModalDetail = function() {
+            document.getElementById('modal-detail').classList.remove('hidden');
+        };
+
+        window.closeModalDetail = function() {
+            document.getElementById('modal-detail').classList.add('hidden');
+        };
+
+        window.lihatDetailJawaban = function(index) {
+            const item = rekapDataLocal[index];
+            if (!item || !item.jawabanMurid) return;
+
+            document.getElementById('detail-title').innerText = `Detail Jawaban: ${item.nama} (${item.kelas})`;
+            const container = document.getElementById('detail-content');
+            container.innerHTML = '';
+
+            BANK_SOAL.forEach((soal, i) => {
+                const ans = item.jawabanMurid[i];
+                const isCorrect = ans === soal.kunci;
+                const alphaAns = ans !== null ? String.fromCharCode(65 + ans) : '-';
+                const alphaKey = String.fromCharCode(65 + soal.kunci);
+
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}`;
+                card.innerHTML = `
+                    <div class="flex justify-between font-bold mb-1">
+                        <span class="text-slate-800">Soal ${i + 1} (${soal.kategori})</span>
+                        <span class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${isCorrect ? 'BENAR (+4)' : 'SALAH / BELUM PERTAMA'}</span>
+                    </div>
+                    <p class="text-slate-700 mb-1.5 font-medium">${soal.pertanyaan}</p>
+                    <div class="text-[11px] space-y-0.5">
+                        <div class="text-slate-600">Jawaban Murid: <strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-600'}">${alphaAns}. ${ans !== null ? soal.pilihan[ans] : 'Tidak dijawab'}</strong></div>
+                        <div class="text-emerald-800 font-semibold">Kunci Jawaban: ${alphaKey}. ${soal.pilihan[soal.kunci]}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            openModalDetail();
+        };
+
+        window.resetDataGuru = function() {
+            const pass = prompt("Masukkan Kata Sandi Guru untuk mereset seluruh data:");
+            if (pass === "guru7") {
+                rekapDataLocal = [];
+                localStorage.removeItem('rekap_asesmen_fantasi_v7');
+                renderTableRekap();
+                alert("Seluruh data rekapitulasi berhasil dihapus.");
+            } else if (pass !== null) {
+                alert("Kata sandi salah! Akses reset ditolak.");
+            }
+        };
+
+        window.downloadCSV = function() {
+            if (rekapDataLocal.length === 0) {
+                alert("Belum ada data untuk diunduh!");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "No,Nama Murid,Kelas,Benar,Salah,Nilai,Kategori,Waktu Pengerjaan,Tanggal\n";
+
+            rekapDataLocal.forEach((item, idx) => {
+                const row = [
+                    idx + 1,
+                    `"${item.nama}"`,
+                    `"${item.kelas}"`,
+                    item.benar,
+                    item.salah,
+                    item.nilai,
+                    `"${item.kategori}"`,
+                    `"${item.waktu}"`,
+                    `"${item.tanggal}"`
+                ].join(",");
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Rekap_Asesmen_Bahasa_Indonesia_VII_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+    </script>
+</body>
+</html>
